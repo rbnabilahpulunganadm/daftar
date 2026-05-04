@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shafaqo Tech | Jasa IT & IoT</title>
+    <!-- Tailwind CSS untuk Styling Cepat & Responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons untuk Ikon Minimalis -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Font Klasik & Elegan */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #e5e7eb; /* gray-200 */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; }
+
+        /* Animasi Transisi Halus */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menyembunyikan elemen */
+        .hidden-step { display: none !important; }
+
+        /* Style Checkbox Kustom */
+        .custom-checkbox input:checked + div {
+            background-color: #000;
+            border-color: #000;
+        }
+        .custom-checkbox input:checked + div svg {
+            display: block;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 text-black">
+
+    <!-- Mobile Frame Container -->
+    <div class="w-full max-w-md bg-white shadow-2xl overflow-hidden flex flex-col relative" style="height: 85vh; max-height: 800px;">
+        
+        <!-- Top Bar -->
+        <div class="h-14 bg-black text-white flex items-center justify-between px-6 flex-shrink-0 z-10">
+            <div class="flex items-center gap-2">
+               <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+               <span class="font-bold tracking-widest text-sm uppercase">Shafaqo Tech</span>
+            </div>
+            <span id="step-indicator" class="text-xs font-mono text-gray-400 hidden">Langkah 1/5</span>
+        </div>
+
+        <!-- Content Area -->
+        <div class="flex-grow p-6 md:p-8 overflow-y-auto relative" id="app-content">
+            
+            <!-- STEP 0: Welcome Screen -->
+            <div id="step-0" class="step-container fade-in flex flex-col items-center justify-center h-full text-center space-y-8">
+                <div class="w-20 h-20 bg-black text-white flex items-center justify-center rounded-none mb-4">
+                    <i data-lucide="monitor" class="w-10 h-10"></i>
+                </div>
+                <h1 class="text-3xl font-bold uppercase tracking-widest border-b-4 border-black pb-4">
+                    Shafaqo Tech
+                </h1>
+                <p class="text-gray-600 leading-relaxed max-w-sm text-sm">
+                    Melayani jasa instalasi komputer, perbaikan, hingga pembuatan sistem cerdas IoT.
+                </p>
+                
+                <div class="bg-gray-50 border border-gray-200 p-5 max-w-sm text-left w-full mt-4">
+                    <div class="flex items-start gap-3 mb-4">
+                        <i data-lucide="info" class="w-5 h-5 mt-1 flex-shrink-0"></i>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            <strong>Permisi,</strong> untuk memberikan pelayanan yang tepat, aplikasi ini akan meminta Anda mengisi beberapa informasi terkait kebutuhan teknis dan lokasi. Apakah Anda berkenan melanjutkan?
+                        </p>
+                    </div>
+                    <button onclick="nextStep()" class="w-full py-4 px-6 text-sm font-semibold uppercase tracking-widest bg-black text-white hover:bg-white hover:text-black transition-all border-2 border-black flex items-center justify-center gap-2">
+                        Ya, Saya Berkenan <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 1: Category Selection -->
+            <div id="step-1" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-8 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Pilih Layanan</h2>
+                    <p class="text-gray-600 text-sm">Apa yang bisa kami bantu hari ini?</p>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-6 flex-grow">
+                    <button onclick="selectCategory('pc')" class="flex flex-col items-center justify-center p-6 border-2 border-black hover:bg-black hover:text-white transition-colors group text-center">
+                        <i data-lucide="monitor" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-lg font-bold uppercase tracking-wide mb-2">Laptop / PC</h3>
+                        <p class="text-sm opacity-80">Install OS, Aplikasi (Office, Desain, Game), & Servis.</p>
+                    </button>
+            
+                    <button onclick="selectCategory('iot')" class="flex flex-col items-center justify-center p-6 border-2 border-black hover:bg-black hover:text-white transition-colors group text-center">
+                        <i data-lucide="cpu" class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="text-lg font-bold uppercase tracking-wide mb-2">Proyek IoT / Smart</h3>
+                        <p class="text-sm opacity-80">Mikrokontroler, Smart Home, Tugas Sekolah/Kampus.</p>
+                    </button>
+                </div>
+                
+                <div class="mt-8">
+                    <button onclick="prevStep()" class="w-full py-4 px-6 text-sm font-semibold uppercase tracking-widest bg-transparent text-black hover:bg-black hover:text-white transition-all border-2 border-black flex items-center justify-center gap-2">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i> Kembali
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2A: PC/Laptop Details -->
+            <div id="step-2-pc" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-6 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Detail Install/Servis</h2>
+                    <p class="text-gray-600 text-sm">Pilih sistem operasi & layanan tambahan.</p>
+                </div>
+
+                <div class="flex-grow overflow-y-auto pr-2 pb-4 space-y-6">
+                    <!-- OS Selection -->
+                    <div>
+                        <h3 class="font-bold text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <i data-lucide="hard-drive" class="w-4 h-4"></i> Install Sistem Operasi
+                        </h3>
+                        <div class="space-y-3" id="os-list">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Other Services -->
+                    <div>
+                        <h3 class="font-bold text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <i data-lucide="package" class="w-4 h-4"></i> Aplikasi & Servis Lainnya
+                        </h3>
+                        <div class="space-y-3" id="services-list">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex gap-4 pt-4 bg-white">
+                    <div class="w-1/3">
+                        <button onclick="prevStep()" class="w-full py-4 flex items-center justify-center border-2 border-black hover:bg-black hover:text-white transition-colors">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="w-2/3">
+                        <button id="btn-next-pc" onclick="nextStep()" disabled class="w-full py-4 text-sm font-bold uppercase tracking-widest bg-black text-white hover:bg-white hover:text-black border-2 border-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+                            Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2B: IoT Details -->
+            <div id="step-2-iot" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-8 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Detail Proyek IoT</h2>
+                    <p class="text-gray-600 text-sm">Ceritakan sistem pintar yang ingin Anda buat.</p>
+                </div>
+
+                <div class="flex-grow">
+                    <textarea 
+                        id="iot-desc"
+                        oninput="validateIot()"
+                        placeholder="Contoh: Saya butuh dibuatkan prototipe penyiram tanaman otomatis untuk tugas akhir menggunakan Arduino, sensor kelembaban, dan pompa air..."
+                        class="w-full h-48 border-2 border-black p-4 focus:outline-none focus:ring-0 text-sm resize-none placeholder-gray-400 bg-gray-50"
+                    ></textarea>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <div class="w-1/3">
+                        <button onclick="prevStep()" class="w-full py-4 flex items-center justify-center border-2 border-black hover:bg-black hover:text-white transition-colors">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="w-2/3">
+                        <button id="btn-next-iot" onclick="nextStep()" disabled class="w-full py-4 text-sm font-bold uppercase tracking-widest bg-black text-white hover:bg-white hover:text-black border-2 border-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+                            Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Delivery Mode -->
+            <div id="step-3" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-8 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Metode Layanan</h2>
+                    <p class="text-gray-600 text-sm">Bagaimana kami memproses perangkat Anda?</p>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-4 flex-grow">
+                    <button onclick="selectDelivery('delivery')" class="flex flex-col items-start text-left p-5 border-2 border-black hover:bg-black hover:text-white transition-colors group relative overflow-hidden">
+                        <i data-lucide="truck" class="w-8 h-8 mb-3 group-hover:translate-x-2 transition-transform"></i>
+                        <h3 class="text-lg font-bold uppercase tracking-wide mb-1">Panggil Teknisi</h3>
+                        <p class="text-xs opacity-80">Kami datang ke lokasi Anda, atau perangkat kami jemput (Delivery).</p>
+                    </button>
+            
+                    <button onclick="selectDelivery('dropoff')" class="flex flex-col items-start text-left p-5 border-2 border-black hover:bg-black hover:text-white transition-colors group">
+                        <i data-lucide="map-pin" class="w-8 h-8 mb-3 group-hover:translate-y-[-4px] transition-transform"></i>
+                        <h3 class="text-lg font-bold uppercase tracking-wide mb-1">Antar Langsung</h3>
+                        <p class="text-xs opacity-80 mb-3">Bawa perangkat Anda ke tempat kami.</p>
+                        
+                        <!-- Peta Google Maps Hitam Putih -->
+                        <div class="bg-gray-100 text-black w-full border border-gray-300 relative overflow-hidden group-hover:border-white">
+                            <p class="text-xs font-mono font-bold p-2 bg-white/90 relative z-10 border-b border-gray-300">📍 Jl. Serasi Tanobato</p>
+                            <iframe 
+                                src="https://maps.google.com/maps?q=Jalan%20Serasi%20Tanobato&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                                class="w-full h-24 grayscale contrast-125 opacity-80 pointer-events-none" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0">
+                            </iframe>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="mt-8 flex gap-4">
+                    <div class="w-1/3">
+                        <button onclick="prevStep()" class="w-full py-4 flex items-center justify-center border-2 border-black hover:bg-black hover:text-white transition-colors">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: Customer Form -->
+            <div id="step-4" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-6 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Data Pemesan</h2>
+                    <p class="text-gray-600 text-sm">Mohon lengkapi data untuk konfirmasi.</p>
+                </div>
+                
+                <div class="flex-grow overflow-y-auto pr-2 pb-4">
+                    <div class="mb-5">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <i data-lucide="user" class="w-4 h-4"></i> Nama Lengkap *
+                        </label>
+                        <input type="text" id="cust-name" oninput="validateForm()" placeholder="John Doe" class="w-full border-b-2 border-gray-300 focus:border-black py-2 bg-transparent outline-none transition-colors text-sm">
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <i data-lucide="phone" class="w-4 h-4"></i> Nomor WhatsApp *
+                        </label>
+                        <input type="tel" id="cust-phone" oninput="validateForm()" placeholder="0812..." class="w-full border-b-2 border-gray-300 focus:border-black py-2 bg-transparent outline-none transition-colors text-sm">
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <i data-lucide="calendar" class="w-4 h-4"></i> Tanggal / Waktu *
+                        </label>
+                        <input type="text" id="cust-date" oninput="validateForm()" placeholder="Besok jam 10 pagi, atau Tgl 12..." class="w-full border-b-2 border-gray-300 focus:border-black py-2 bg-transparent outline-none transition-colors text-sm">
+                    </div>
+
+                    <div class="mb-5" id="address-container">
+                        <label class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i> Alamat Pengerjaan *
+                        </label>
+                        <textarea id="cust-address" oninput="validateForm()" placeholder="Tuliskan alamat lengkap beserta patokan..." class="w-full border-b-2 border-gray-300 focus:border-black py-2 bg-transparent outline-none transition-colors resize-none text-sm" rows="3"></textarea>
+                        
+                        <button id="btn-gps" onclick="getLocation()" class="mt-3 w-full py-3 text-xs font-bold uppercase tracking-widest bg-gray-100 text-black hover:bg-gray-200 border border-gray-300 transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="crosshair" class="w-4 h-4"></i> Gunakan Lokasi Saat Ini (GPS)
+                        </button>
+                        <p id="gps-status" class="text-xs text-green-600 mt-2 hidden font-bold">📍 Lokasi akurat berhasil disematkan!</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 flex gap-4 pt-4 border-t border-gray-200 bg-white">
+                    <div class="w-1/3">
+                        <button onclick="prevStep()" class="w-full py-4 flex items-center justify-center border-2 border-black hover:bg-black hover:text-white transition-colors">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="w-2/3">
+                        <button id="btn-next-form" onclick="generateSummary(); nextStep()" disabled class="w-full py-4 text-sm font-bold uppercase tracking-widest bg-black text-white hover:bg-white hover:text-black border-2 border-black transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+                            Review <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5: Summary -->
+            <div id="step-5" class="step-container hidden-step fade-in flex flex-col h-full">
+                <div class="mb-6 border-b-2 border-black pb-4">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 uppercase">Ringkasan</h2>
+                    <p class="text-gray-600 text-sm">Periksa kembali pesanan Anda.</p>
+                </div>
+                
+                <div class="flex-grow border-2 border-black p-5 bg-gray-50 relative overflow-y-auto">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-black"></div>
+                    
+                    <div class="space-y-4 text-sm mt-2" id="summary-content">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex gap-4">
+                    <div class="w-1/3">
+                        <button onclick="prevStep()" class="w-full py-4 flex items-center justify-center border-2 border-black hover:bg-black hover:text-white transition-colors">
+                            Edit
+                        </button>
+                    </div>
+                    <div class="w-2/3">
+                        <button onclick="sendToWhatsApp()" class="w-full py-4 text-sm font-bold uppercase tracking-widest bg-black text-white hover:bg-white hover:text-black border-2 border-black transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i> Pesan via WA
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT VANILLA -->
+    <script>
+        // Inisialisasi Ikon Lucide
+        lucide.createIcons();
+
+        // State Aplikasi
+        let state = {
+            step: 0,
+            category: '', // 'pc' | 'iot'
+            selectedOS: [], // Array untuk menyimpan OS yang dipilih
+            selectedServices: [], // Array untuk servis lainnya
+            iotDescription: '',
+            deliveryMode: '', // 'delivery' | 'dropoff'
+            customer: {
+                name: '',
+                phone: '',
+                date: '',
+                address: '',
+                mapsLink: ''
+            }
+        };
+
+        // Data Sistem Operasi dengan Deskripsi
+        const osData = [
+            { id: 'Win', title: 'Windows (Semua Versi)', desc: 'Sistem operasi standar, cocok untuk office, sekolah, tugas, dan gaming.' },
+            { id: 'Linux', title: 'Linux (Semua Distro)', desc: 'Ringan & kebal virus. Cocok untuk programmer atau server (Ubuntu, Mint, Debian, dll).' },
+            { id: 'ChromeOS', title: 'Chrome OS / Flex', desc: 'Sangat ringan & cepat. Solusi terbaik untuk "menghidupkan" kembali laptop jadul.' },
+            { id: 'FydeOS', title: 'Fyde OS', desc: 'Mirip Chrome OS namun memiliki fitur khusus untuk menjalankan aplikasi Android.' }
+        ];
+
+        // Data Servis Lainnya
+        const servicesData = [
+            "Install Microsoft Office (Word, Excel, dll)",
+            "Install Aplikasi Desain (Adobe, Corel, AutoCAD)",
+            "Install Game",
+            "Install AI Lokal (ChatGPT Offline, Stable Diffusion, dll)",
+            "Servis Hardware / Ganti Sparepart (RAM/SSD)",
+            "Pembersihan Virus & Optimasi Sistem"
+        ];
+
+        // Render Data ke HTML saat dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+            renderPCList();
+        });
+
+        function renderPCList() {
+            const osContainer = document.getElementById('os-list');
+            const svcContainer = document.getElementById('services-list');
+
+            // Render OS List
+            osContainer.innerHTML = osData.map(os => `
+                <label class="custom-checkbox flex items-start gap-3 p-3 border border-gray-300 hover:border-black cursor-pointer bg-white transition-colors group">
+                    <input type="checkbox" class="hidden" value="${os.title}" onchange="toggleArray('selectedOS', this.value)">
+                    <div class="w-5 h-5 border-2 border-black flex-shrink-0 mt-0.5 flex items-center justify-center transition-colors">
+                        <i data-lucide="check" class="w-3 h-3 text-white hidden"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-sm block">${os.title}</span>
+                        <span class="text-xs text-gray-500 leading-snug block mt-1">${os.desc}</span>
+                    </div>
+                </label>
+            `).join('');
+
+            // Render Services List
+            svcContainer.innerHTML = servicesData.map(svc => `
+                <label class="custom-checkbox flex items-center gap-3 p-3 border border-gray-300 hover:border-black cursor-pointer bg-white transition-colors">
+                    <input type="checkbox" class="hidden" value="${svc}" onchange="toggleArray('selectedServices', this.value)">
+                    <div class="w-5 h-5 border-2 border-black flex-shrink-0 flex items-center justify-center transition-colors">
+                        <i data-lucide="check" class="w-3 h-3 text-white hidden"></i>
+                    </div>
+                    <span class="font-medium text-sm block">${svc}</span>
+                </label>
+            `).join('');
+
+            // Re-inisialisasi ikon baru yang di-render
+            lucide.createIcons();
+        }
+
+        // Fungsi Helper untuk Toggle Checkbox
+        function toggleArray(arrayName, value) {
+            const index = state[arrayName].indexOf(value);
+            if (index > -1) {
+                state[arrayName].splice(index, 1);
+            } else {
+                state[arrayName].push(value);
+            }
+            validatePC();
+        }
+
+        // --- Navigasi Wizard ---
+        function showStep(stepIndex) {
+            // Sembunyikan semua step
+            document.querySelectorAll('.step-container').forEach(el => el.classList.add('hidden-step'));
+            
+            // Tampilkan indikator step jika bukan halaman welcome
+            const indicator = document.getElementById('step-indicator');
+            if(stepIndex > 0) {
+                indicator.classList.remove('hidden');
+                indicator.innerText = `Langkah ${stepIndex}/5`;
+            } else {
+                indicator.classList.add('hidden');
+            }
+
+            // Tampilkan step yang sesuai
+            if (stepIndex === 2) {
+                if (state.category === 'pc') document.getElementById('step-2-pc').classList.remove('hidden-step');
+                else document.getElementById('step-2-iot').classList.remove('hidden-step');
+            } else {
+                document.getElementById(`step-${stepIndex}`).classList.remove('hidden-step');
+            }
+            
+            state.step = stepIndex;
+        }
+
+        function nextStep() {
+            if (state.step < 5) showStep(state.step + 1);
+        }
+
+        function prevStep() {
+            if (state.step > 0) showStep(state.step - 1);
+        }
+
+        // --- Aksi Spesifik ---
+        function selectCategory(cat) {
+            state.category = cat;
+            nextStep();
+        }
+
+        function selectDelivery(mode) {
+            state.deliveryMode = mode;
+            // Tampilkan/Sembunyikan form alamat berdasarkan mode
+            const addressContainer = document.getElementById('address-container');
+            if(mode === 'delivery') {
+                addressContainer.style.display = 'block';
+            } else {
+                addressContainer.style.display = 'none';
+                state.customer.address = ''; // reset address if dropoff
+                state.customer.mapsLink = ''; // reset maps link
+                document.getElementById('cust-address').value = '';
+                document.getElementById('gps-status').classList.add('hidden');
+            }
+            validateForm(); // re-validate
+            nextStep();
+        }
+
+        // --- GPS Function ---
+        function getLocation() {
+            const btnGps = document.getElementById('btn-gps');
+            const statusText = document.getElementById('gps-status');
+            const addressInput = document.getElementById('cust-address');
+
+            if (!navigator.geolocation) {
+                alert("Maaf, browser Anda tidak mendukung fitur GPS.");
+                return;
+            }
+
+            btnGps.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Meminta Izin & Mencari Lokasi...';
+            lucide.createIcons();
+
+            // Opsi untuk mempercepat pencarian lokasi dan mengatasi timeout
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000, // Maksimal tunggu 10 detik
+                maximumAge: 0
+            };
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    state.customer.mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+                    
+                    statusText.classList.remove('hidden');
+                    statusText.classList.replace('text-red-600', 'text-green-600');
+                    statusText.innerHTML = '📍 Titik koordinat berhasil disematkan!';
+                    
+                    btnGps.innerHTML = '<i data-lucide="crosshair" class="w-4 h-4"></i> Perbarui Titik GPS';
+                    lucide.createIcons();
+
+                    if(addressInput.value.trim() === '') {
+                         addressInput.value = "Lokasi didapatkan dari GPS. (Silakan lengkapi dengan warna cat rumah/patokan agar lebih jelas)";
+                         validateForm();
+                    }
+                },
+                (error) => {
+                    let errorMsg = "Gagal mendapatkan lokasi.";
+                    
+                    // Menangani jenis error spesifik dari browser
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg = "Izin ditolak oleh Browser. Anda harus mengizinkan akses lokasi pada pop-up sistem, atau ketik alamat manual.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg = "Sinyal GPS tidak tersedia. Pastikan GPS di HP Anda menyala.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg = "Waktu pencarian lokasi habis (Timeout). Sinyal GPS mungkin lemah.";
+                            break;
+                    }
+
+                    // Tampilkan pesan error di bawah tombol tanpa alert (lebih elegan)
+                    statusText.classList.remove('hidden');
+                    statusText.classList.replace('text-green-600', 'text-red-600');
+                    statusText.innerHTML = `⚠️ ${errorMsg}`;
+
+                    btnGps.innerHTML = '<i data-lucide="crosshair" class="w-4 h-4"></i> Coba Lagi Ambil GPS';
+                    lucide.createIcons();
+                },
+                options
+            );
+        }
+
+        // --- Validasi ---
+        function validatePC() {
+            const btn = document.getElementById('btn-next-pc');
+            // Valid jika minimal 1 OS atau 1 Service dipilih
+            if (state.selectedOS.length > 0 || state.selectedServices.length > 0) {
+                btn.removeAttribute('disabled');
+            } else {
+                btn.setAttribute('disabled', 'true');
+            }
+        }
+
+        function validateIot() {
+            state.iotDescription = document.getElementById('iot-desc').value;
+            const btn = document.getElementById('btn-next-iot');
+            if (state.iotDescription.trim().length > 5) {
+                btn.removeAttribute('disabled');
+            } else {
+                btn.setAttribute('disabled', 'true');
+            }
+        }
+
+        function validateForm() {
+            state.customer.name = document.getElementById('cust-name').value;
+            state.customer.phone = document.getElementById('cust-phone').value;
+            state.customer.date = document.getElementById('cust-date').value;
+            state.customer.address = document.getElementById('cust-address').value;
+
+            let isValid = state.customer.name.trim() !== '' && 
+                          state.customer.phone.trim() !== '' && 
+                          state.customer.date.trim() !== '';
+            
+            if (state.deliveryMode === 'delivery' && state.customer.address.trim() === '') {
+                isValid = false;
+            }
+
+            const btn = document.getElementById('btn-next-form');
+            if (isValid) btn.removeAttribute('disabled');
+            else btn.setAttribute('disabled', 'true');
+        }
+
+        // --- Generate Summary ---
+        function generateSummary() {
+            const container = document.getElementById('summary-content');
+            let html = '';
+
+            // Kategori
+            html += `
+                <div>
+                    <p class="text-gray-500 uppercase text-xs font-bold mb-1">Layanan</p>
+                    <p class="font-bold">${state.category === 'pc' ? 'Servis & Installasi PC/Laptop' : 'Proyek IoT / Smart Program'}</p>
+                </div>
+            `;
+
+            // Detail Layanan
+            html += `<div class="border-t border-gray-300 pt-3">
+                        <p class="text-gray-500 uppercase text-xs font-bold mb-2">Detail Pengerjaan</p>`;
+            
+            if (state.category === 'pc') {
+                if(state.selectedOS.length > 0) {
+                    html += `<p class="font-semibold text-xs mt-1">Sistem Operasi:</p><ul class="list-disc pl-4 mb-2 text-gray-800">`;
+                    state.selectedOS.forEach(os => html += `<li>${os}</li>`);
+                    html += `</ul>`;
+                }
+                if(state.selectedServices.length > 0) {
+                    html += `<p class="font-semibold text-xs mt-1">Aplikasi/Servis:</p><ul class="list-disc pl-4 text-gray-800">`;
+                    state.selectedServices.forEach(svc => html += `<li>${svc}</li>`);
+                    html += `</ul>`;
+                }
+            } else {
+                html += `<p class="italic text-gray-700 bg-white p-2 border border-gray-200">"${state.iotDescription}"</p>`;
+            }
+            html += `</div>`;
+
+            // Metode
+            html += `
+                <div class="border-t border-gray-300 pt-3">
+                    <p class="text-gray-500 uppercase text-xs font-bold mb-1">Metode</p>
+                    <p class="font-bold flex items-center gap-2">
+                        ${state.deliveryMode === 'delivery' ? '<i data-lucide="truck" class="w-4 h-4"></i> Panggil Teknisi (Delivery)' : '<i data-lucide="map-pin" class="w-4 h-4"></i> Antar ke Lokasi'}
+                    </p>
+                    ${state.deliveryMode === 'dropoff' ? '<p class="text-xs text-gray-600 mt-1">📍 Jl. Serasi Tanobato</p>' : ''}
+                </div>
+            `;
+
+            // Pelanggan
+            html += `
+                <div class="border-t border-gray-300 pt-3">
+                    <p class="text-gray-500 uppercase text-xs font-bold mb-1">Data Pelanggan</p>
+                    <p class="font-bold">${state.customer.name}</p>
+                    <p class="text-gray-700"><i data-lucide="phone" class="w-3 h-3 inline"></i> ${state.customer.phone}</p>
+                    <p class="text-gray-700 text-xs mt-1"><i data-lucide="calendar" class="w-3 h-3 inline"></i> Jadwal: ${state.customer.date}</p>
+                    ${state.deliveryMode === 'delivery' ? `<p class="text-gray-700 text-xs mt-1"><i data-lucide="map-pin" class="w-3 h-3 inline"></i> Alamat: ${state.customer.address}</p>` : ''}
+                    ${state.customer.mapsLink ? `<p class="text-green-600 text-xs mt-1 font-bold">📍 Link Maps disertakan</p>` : ''}
+                </div>
+            `;
+
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        // --- Kirim ke WA ---
+        function sendToWhatsApp() {
+            const phoneAdmin = "6282273902728"; 
+            
+            let text = `Halo Admin *Shafaqo Tech* 👋%0A`;
+            text += `Perkenalkan, saya *${state.customer.name}*. Saya ingin menggunakan jasa Shafaqo Tech dengan detail pesanan sebagai berikut:%0A%0A`;
+            
+            text += `*📋 DATA PEMESAN*%0A`;
+            text += `▪️ *Nama:* ${state.customer.name}%0A`;
+            text += `▪️ *No. WhatsApp:* ${state.customer.phone}%0A`;
+            text += `▪️ *Rencana Jadwal:* ${state.customer.date}%0A%0A`;
+
+            text += `*💻 DETAIL LAYANAN*%0A`;
+            text += `▪️ *Kategori:* ${state.category === 'pc' ? 'Laptop/PC' : 'Proyek IoT / Smart Program'}%0A`;
+            
+            if (state.category === 'pc') {
+                if(state.selectedOS.length > 0) text += `▪️ *Install OS:* ${state.selectedOS.join(', ')}%0A`;
+                if(state.selectedServices.length > 0) text += `▪️ *Layanan Lain:* ${state.selectedServices.join(', ')}%0A`;
+            } else {
+                text += `▪️ *Detail Proyek IoT:* ${state.iotDescription}%0A`;
+            }
+            
+            text += `%0A*🚚 METODE LAYANAN*%0A`;
+            text += `▪️ *Pilihan:* ${state.deliveryMode === 'delivery' ? 'Panggil Teknisi (Delivery)' : 'Antar Langsung'}%0A`;
+            
+            if (state.deliveryMode === 'delivery') {
+                text += `▪️ *Alamat Pengerjaan:* ${state.customer.address}%0A`;
+                if (state.customer.mapsLink) {
+                    text += `▪️ *📍 Titik Lokasi GPS:* ${state.customer.mapsLink}%0A`;
+                }
+            } else {
+                text += `▪️ *Catatan:* Saya akan mengantar perangkat langsung ke lokasi Shafaqo Tech.%0A`;
+                text += `▪️ *📍 Rute ke Lokasi Shafaqo Tech:* https://maps.google.com/maps?q=Jalan+Serasi+Tanobato%0A`;
+            }
+            
+            text += `%0AMohon informasi selanjutnya mengenai ketersediaan teknisi ya. Terima kasih! 🙏`;
+            
+            const url = `https://wa.me/${phoneAdmin}?text=${text}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
