@@ -718,47 +718,47 @@
         function sendToWhatsApp() {
             const phoneAdmin = "6282273902728"; 
             
-            let text = `Halo Admin *Shafaqo Tech* 👋%0A`;
+            let text = `Halo Admin *Shafaqo Tech*,%0A`;
             text += `Saya ingin memesan jasa dengan detail pesanan berikut:%0A%0A`;
             
             // Frame Data Pemesan
-            text += `*╔════ 📋 DATA PEMESAN ════╗*%0A`;
-            text += ` 👤 *Nama:* ${state.customer.name}%0A`;
-            text += ` 📱 *WA:* ${state.customer.phone}%0A`;
-            text += ` 🗓️ *Jadwal:* ${state.customer.date}%0A`;
+            text += `*┌── DATA PEMESAN ──┐*%0A`;
+            text += `- *Nama:* ${state.customer.name}%0A`;
+            text += `- *WA:* ${state.customer.phone}%0A`;
+            text += `- *Jadwal:* ${state.customer.date}%0A`;
 
             // Frame Detail Layanan
-            text += `*╠═══ 💻 DETAIL LAYANAN ═══╣*%0A`;
-            text += ` 🔹 *Kategori:* ${state.category === 'pc' ? 'Laptop/PC' : 'Proyek IoT / Smart Program'}%0A`;
+            text += `%0A*├── DETAIL LAYANAN ──┤*%0A`;
+            text += `- *Kategori:* ${state.category === 'pc' ? 'Laptop/PC' : 'Proyek IoT / Smart Program'}%0A`;
             
             if (state.category === 'pc') {
-                if(state.selectedOS.length > 0) text += ` ⚙️ *Install OS:* ${state.selectedOS.join(', ')}%0A`;
-                if(state.selectedApps.length > 0) text += ` 📦 *Aplikasi:* ${state.selectedApps.join(', ')}%0A`;
-                if(state.selectedServices.length > 0) text += ` 🔧 *Servis Hardware:* ${state.selectedServices.join(', ')}%0A`;
+                if(state.selectedOS.length > 0) text += `- *Install OS:* ${state.selectedOS.join(', ')}%0A`;
+                if(state.selectedApps.length > 0) text += `- *Aplikasi:* ${state.selectedApps.join(', ')}%0A`;
+                if(state.selectedServices.length > 0) text += `- *Servis Hardware:* ${state.selectedServices.join(', ')}%0A`;
             } else {
-                text += ` 📝 *Detail Proyek IoT:* ${state.iotDescription}%0A`;
+                text += `- *Detail Proyek:* ${state.iotDescription}%0A`;
             }
             
             // Frame Metode Layanan
-            text += `*╠═══ 🚚 METODE LAYANAN ═══╣*%0A`;
+            text += `%0A*├── METODE LAYANAN ──┤*%0A`;
             
             if (state.deliveryMode === 'delivery') {
-                text += ` 🏍️ *Pilihan:* Panggil Teknisi (Delivery)%0A`;
-                text += ` 🏠 *Alamat Pengerjaan:* ${state.customer.address}%0A`;
+                text += `- *Pilihan:* Panggil Teknisi (Delivery)%0A`;
+                text += `- *Alamat Pengerjaan:* ${state.customer.address}%0A`;
                 if (state.customer.mapsLink) {
-                    text += ` 📍 *Titik Lokasi GPS:* ${state.customer.mapsLink}%0A`;
+                    text += `- *Titik Lokasi GPS:* ${state.customer.mapsLink}%0A`;
                 }
             } else {
-                // Link Maps untuk Antar Langsung diatur disini
-                text += ` 🚶‍♂️ *Pilihan:* Antar Langsung%0A`;
-                text += ` 🏢 *Tujuan:* Lokasi Shafaqo Tech%0A`;
-                text += ` 📍 *Rute Google Maps Anda:* https://maps.google.com/maps?q=Jalan+Serasi+Tanobato%0A`;
+                // Link Maps untuk Antar Langsung
+                text += `- *Pilihan:* Antar Langsung%0A`;
+                text += `- *Tujuan:* Lokasi Shafaqo Tech%0A`;
+                text += `- *Rute Google Maps:* https://maps.google.com/maps?q=Jalan+Serasi+Tanobato%0A`;
             }
             
             // Penutup Frame
-            text += `*╚═══════════════════════╝*%0A%0A`;
+            text += `%0A*└──────────────────┘*%0A%0A`;
             
-            text += `Mohon informasi selanjutnya mengenai ketersediaan teknisi ya. Terima kasih! 🙏`;
+            text += `Mohon informasi selanjutnya mengenai ketersediaan teknisi. Terima kasih.`;
             
             const url = `https://wa.me/${phoneAdmin}?text=${text}`;
             window.open(url, '_blank');
